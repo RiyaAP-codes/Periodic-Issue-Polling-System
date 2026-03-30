@@ -4,6 +4,7 @@ require("dotenv").config({ path: "./.env" });
 console.log(process.env.MONGO_URI);
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
+const issueRoutes = require("./routes/issueRoutes");
 
 const app = express();
 
@@ -16,6 +17,7 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
+app.use("/api/issues", issueRoutes);
 
 // test route
 app.get("/", (req, res) => {
