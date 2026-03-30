@@ -28,3 +28,8 @@ This is a backend system for submitting issues, collecting feedback, and conduct
 2. Run `npm install` inside backend
 3. Create `.env` file
 4. Run `npm run dev`
+
+5. ## 📸 Current Status
+- Backend authentication system completed
+- Role-based access implemented
+- Issue module in progress
