@@ -33,3 +33,19 @@ This is a backend system for submitting issues, collecting feedback, and conduct
 - Backend authentication system completed
 - Role-based access implemented
 - Issue module in progress
+
+## 🔐 Roles
+- User: Can submit and view own issues
+- Admin: Can view all issues and update status
+
+## 📊 API Endpoints
+
+### Auth
+- POST /api/auth/register
+- POST /api/auth/login
+
+### Issues
+- POST /api/issues/create
+- GET /api/issues/my
+- GET /api/issues/all (Admin)
+- PUT /api/issues/update/:id (Admin)
