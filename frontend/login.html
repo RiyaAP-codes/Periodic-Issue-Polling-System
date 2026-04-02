@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+}
+
+.container{
+    width:800px;
+    height:450px;
+    background:#fff;
+    border-radius:25px;
+    display:flex;
+    overflow:hidden;
+    box-shadow:0 20px 50px rgba(0,0,0,0.4);
+    position:relative;
+}
+
+/* LEFT SIDE */
+.left{
+    width:50%;
+    overflow:hidden;
+}
+
+.forms{
+    width:200%;
+    height:100%;
+    display:flex;
+    transition:0.6s;
+}
+
+.container.active .forms{
+    transform:translateX(-50%);
+}
+
+.form{
+    width:50%;
+    padding:60px 40px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.form h2{
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border-radius:30px;
+    border:1px solid #ccc;
+    outline:none;
+}
+
+button{
+    padding:12px;
+    border:none;
+    border-radius:30px;
+    background:#2c7fb8;
+    color:white;
+    cursor:pointer;
+    margin-top:15px;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#1c5f8a;
+}
+
+/* RIGHT SIDE */
+.right{
+    width:50%;
+    background:linear-gradient(135deg,#1c92d2,#0f2027);
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:40px;
+}
+
+.right button{
+    background:white;
+    color:#0f2027;
+    width:150px;
+}
+
+.right button:hover{
+    background:#ddd;
+}
+
+/* POPUP */
+.popup{
+    position:absolute;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:red;
+    color:white;
+    padding:10px 20px;
+    border-radius:10px;
+    display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="container">
+
+    <div class="left">
+        <div class="forms">
+
+            <!-- LOGIN FORM -->
+            <div class="form">
+                <h2>Login</h2>
+                <input type="text" id="loginUsername" placeholder="Username">
+                <input type="password" id="loginPassword" placeholder="Password">
+                <button type="button" onclick="loginUser()">Login</button>
+            </div>
+
+            <!-- REGISTER FORM -->
+            <div class="form">
+                <h2>Register</h2>
+                <input type="text" id="registerName" placeholder="Full Name">
+                <input type="email" id="registerEmail" placeholder="Email">
+                <input type="password" id="registerPassword" placeholder="Create Password">
+                <button type="button" onclick="registerUser()">Register</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right">
+        <h2 id="overlayTitle">Welcome Back!</h2>
+        <p id="overlayText">Enter your credentials to login</p>
+        <button id="toggleBtn">Register</button>
+    </div>
+
+</div>
+
+<div class="popup" id="popupMsg"></div>
+
+<script>
+
+const container = document.getElementById("container");
+const toggleBtn = document.getElementById("toggleBtn");
+const overlayTitle = document.getElementById("overlayTitle");
+const overlayText = document.getElementById("overlayText");
+
+toggleBtn.addEventListener("click", function(){
+    container.classList.toggle("active");
+
+    if(container.classList.contains("active")){
+        overlayTitle.innerText = "Already Registered?";
+        overlayText.innerText = "Login with your credentials";
+        toggleBtn.innerText = "Login";
+    } else {
+        overlayTitle.innerText = "Welcome Back!";
+        overlayText.innerText = "Enter your credentials to login";
+        toggleBtn.innerText = "Register";
+    }
+});
+
+function showPopup(message){
+    var popup = document.getElementById("popupMsg");
+    popup.innerText = message;
+    popup.style.display = "block";
+
+    setTimeout(function(){
+        popup.style.display = "none";
+    },2000);
+}
+
+function registerUser(){
+
+    var name = document.getElementById("registerName").value;
+    var email = document.getElementById("registerEmail").value;
+    var pass = document.getElementById("registerPassword").value;
+
+    if(name === "" || email === "" || pass === ""){
+        showPopup("Please fill all register fields!");
+        return;
+    }
+
+    localStorage.setItem("username", name);
+    localStorage.setItem("userpass", pass);
+
+    showPopup("Registration Successful!");
+
+    setTimeout(function(){
+        container.classList.remove("active");
+    },1000);
+}
+
+function loginUser(){
+
+    var username = document.getElementById("loginUsername").value;
+    var password = document.getElementById("loginPassword").value;
+
+    if(username === "" || password === ""){
+        showPopup("Please fill in all fields!");
+        return;
+    }
+
+    var savedUser = localStorage.getItem("username");
+    var savedPass = localStorage.getItem("userpass");
+
+    if(username === savedUser && password === savedPass){
+        showPopup("Login Successful!");
+        setTimeout(function(){
+            window.location.href = "dashboard.html";
+        },1000);
+    } else {
+        showPopup("Invalid Credentials!");
+    }
+}
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+/* Animated Background */
+body{
+    display:flex;
+    min-height:100vh;
+    background: linear-gradient(-45deg, #141e30, #243b55, #1c92d2, #0f2027);
+    background-size: 400% 400%;
+    animation: gradientMove 12s ease infinite;
+}
+
+@keyframes gradientMove {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+/* Sidebar */
+.sidebar{
+    width:250px;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(15px);
+    color:white;
+    padding:30px 20px;
+}
+
+.sidebar h2{
+    margin-bottom:40px;
+    text-align:center;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar ul li{
+    padding:15px;
+    margin:15px 0;
+    border-radius:12px;
+    cursor:pointer;
+    transition:0.3s;
+    background:rgba(255,255,255,0.1);
+}
+
+.sidebar ul li:hover{
+    background:#1c92d2;
+    transform:translateX(5px);
+}
+
+/* Main Content */
+.main{
+    flex:1;
+    padding:40px;
+    backdrop-filter: blur(20px);
+    background: rgba(255,255,255,0.1);
+    border-radius:30px 0 0 30px;
+    color:white;
+    position:relative;
+}
+
+/* Cards */
+.card{
+    background: rgba(255,255,255,0.15);
+    padding:25px;
+    border-radius:20px;
+    margin-bottom:25px;
+    backdrop-filter: blur(10px);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 30px rgba(0,0,0,0.3);
+}
+
+/* Logout Button */
+.logout{
+    position:absolute;
+    top:30px;
+    right:40px;
+    background:#1c92d2;
+    color:white;
+    padding:10px 25px;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.logout:hover{
+    background:#0f2027;
+    transform:scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>Polling System</h2>
+    <ul>
+        <li>Home</li>
+        <li onclick="openCreatePoll()">Create Poll</li>
+        <li>View Results</li>
+        <li>My Profile</li>
+    </ul>
+</div>
+
+<div class="main">
+    <button class="logout" onclick="logout()">Logout</button>
+    <h1>Welcome to Dashboard</h1>
+
+    <div class="card">
+        <h3>Active Polls</h3>
+        <p>You can participate in current polls here.</p>
+    </div>
+
+    <div class="card">
+        <h3>Recent Activity</h3>
+        <p>No recent activity yet.</p>
+    </div>
+</div>
+
+<script>
+function logout(){
+    window.location.href = "login.html";
+}
+
+function openCreatePoll(){
+    window.location.href = "createpoll.html";
+}
+</script>
+
+</body>
+</html>
+
